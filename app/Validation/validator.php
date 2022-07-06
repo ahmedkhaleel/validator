@@ -4,7 +4,17 @@ namespace App\Validation;
 
 class validator
 {
-    /**
-     * @var array
-     */
+
+
+
+
+    public function __construct(protected array $data)
+    {
+
+    }
+
+    public function setRules(array $rules)
+    {
+       $this->rules = $rules;
+    }
 }
