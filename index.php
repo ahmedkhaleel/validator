@@ -6,8 +6,8 @@ use App\Validation\validator;
 
 require_once 'vendor/autoload.php';
 $validator = new validator([
-    'first_name' => 'ahmed',
-    'email' => '',
+    'first_name' => 'ahmed ',
+    'email' => 'xaf@sds.sads',
 ]);
 $validator->setRules([
     'first_name'=>[
@@ -19,5 +19,9 @@ $validator->setRules([
 ]
 ]);
 
-$validator->validate();
-dump($validator);
+if(!$validator->validate())
+{
+   dump($validator->getErrors());
+}else{
+    dump('Passed!');
+}

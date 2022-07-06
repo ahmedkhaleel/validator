@@ -40,6 +40,7 @@ class validator
               $this->validateRule($field,$rule);
           }
         }
+        return $this->errors->hasErrors();
     }
 
     protected function validateRule($field,Rule $rule)
@@ -48,6 +49,7 @@ class validator
         {
             $this->errors->add($field, $rule->message($field));
         }
+
     }
 
     protected function getFieldValue($field, $data)
@@ -55,5 +57,12 @@ class validator
         return $data[$field] ?? null;
     }
 
+    /**
+     * @return array_keys
+     */
+    public function getErrors()
+    {
+        return $this->errors->getErrors();
+    }
 
 }
