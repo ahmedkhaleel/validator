@@ -1,0 +1,12 @@
+{
+  "name": "ahmedkhaleel/validator",
+  "description": "This Program Validates an Email Address By Ahmed khaleel",
+  "autoload": {
+    "psr-4": {
+      "App\\": "app"
+    }
+  },
+  "require": {
+    "symfony/var-dumper": "^6.1"
+  }
+}
