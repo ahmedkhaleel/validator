@@ -2,14 +2,28 @@
 
 namespace App\Validation;
 
+use App\Validation\Errors\ErrorBag;
 use App\Validation\Rules\Rule;
 
 class validator
 {
 
+
+    /**
+     * @var array
+     */
+    protected $rules = [];
+
+    /**
+     * @var array
+     */
+    protected $errors ;
+
+
+
     public function __construct(protected array $data)
     {
-
+        $this->errors = new ErrorBag();
     }
 
     public function setRules(array $rules)
@@ -32,7 +46,7 @@ class validator
     {
         if(!$rule->passes($field, $this->getFieldValue($field,$this->data)))
         {
-            dump($rule->message($field));
+            $this->errors->add($field, $rule->message($field));
         }
     }
 
