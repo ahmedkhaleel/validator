@@ -5,7 +5,7 @@ use App\Validation\validator;
 
 require_once 'vendor/autoload.php';
 $validator = new validator([
-    'name' => 'Ahmed Khaleel',
+    'name' => 'ahmed khaleel ',
     'email' => 'info@ahmed-khaleel.net',
 ]);
 $validator->setRules([
@@ -14,5 +14,4 @@ $validator->setRules([
 ]
 ]);
 
-
-dump($validator);
+$validator->validate();
