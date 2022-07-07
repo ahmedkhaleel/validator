@@ -3,6 +3,8 @@
 namespace App\Validation;
 
 use App\Validation\Errors\ErrorBag;
+use App\Validation\Rules\EmailRule;
+use App\Validation\Rules\RequiredRule;
 use App\Validation\Rules\Rule;
 
 class validator
@@ -19,7 +21,12 @@ class validator
      */
     protected $errors ;
 
+    protected $ruleMap = [
+        'required' => RequiredRule::class,
+        'email' => EmailRule::class,
+        'ahmed' => AhmedRule::class,
 
+    ];
 
     public function __construct(protected array $data)
     {
@@ -35,14 +42,28 @@ class validator
     {
         foreach ($this->rules as $field => $rules)
         {
-          foreach($rules as $rule)
+
+          foreach($this->resolveRules($rules) as $rule)
           {
               $this->validateRule($field,$rule);
           }
         }
         return $this->errors->hasErrors();
     }
+    public function resolveRules(array $rules)
+    {
+        return array_map(function ($rule){
+            if(is_string($rule)){
+                return $this->getRuleFromString($rule);
+            }
+            return $rule;
+        },$rules);
 
+    }
+public function getRuleFromString($rule)
+{
+    return new $this->ruleMap[$rule]();
+}
     protected function validateRule($field,Rule $rule)
     {
         if(!$rule->passes($field, $this->getFieldValue($field,$this->data)))
