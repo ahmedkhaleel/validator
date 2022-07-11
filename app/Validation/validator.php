@@ -3,6 +3,8 @@
 namespace App\Validation;
 
 use App\Validation\Errors\ErrorBag;
+use App\Validation\Rules\AhmedRule;
+use App\Validation\Rules\BetweenRule;
 use App\Validation\Rules\EmailRule;
 use App\Validation\Rules\RequiredRule;
 use App\Validation\Rules\Rule;
@@ -25,6 +27,7 @@ class validator
         'required' => RequiredRule::class,
         'email' => EmailRule::class,
         'ahmed' => AhmedRule::class,
+        'between' => BetweenRule::class,
 
     ];
 
@@ -62,7 +65,11 @@ class validator
     }
 public function getRuleFromString($rule)
 {
-    return new $this->ruleMap[$rule]();
+    $exploded = explode(':',$rule);
+    $rule = $exploded[0];
+    $options =explode(',',end($exploded));
+
+    return new $this->ruleMap[$rule](...$options);
 }
     protected function validateRule($field,Rule $rule)
     {
