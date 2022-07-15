@@ -5,6 +5,7 @@ use App\Validation\Rules\AhmedRule;
 use App\Validation\Rules\BetweenRule;
 use App\Validation\Rules\EmailRule;
 use App\Validation\Rules\RequiredRule;
+use App\Validation\Rules\RequiredWithRule;
 
 
 class RuleMap {
@@ -16,6 +17,7 @@ class RuleMap {
         'email' => EmailRule::class,
         'ahmed' => AhmedRule::class,
         'between' => BetweenRule::class,
+        'required_with' => RequiredWithRule::class,
     ];
 
     /**

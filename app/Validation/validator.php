@@ -97,7 +97,7 @@ class validator
      */
     protected function validateRule($field, Rule $rule)
     {
-        if (!$rule->passes($field, $this->getFieldValue($field, $this->data))) {
+        if (!$rule->passes($field, $this->getFieldValue($field, $this->data),$this->data)) {
             $this->errors->add($field, $rule->message($this->alias($field)));
         }
 

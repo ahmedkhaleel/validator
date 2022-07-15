@@ -15,7 +15,7 @@ class AhmedRule extends Rule
      * @param string $value
      * @return bool
      */
-    public function passes($field,$value)
+    public function passes($field,$value,$data)
     {
       return strlen($value) < $this->ahmed;
     }

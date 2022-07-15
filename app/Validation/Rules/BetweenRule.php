@@ -16,7 +16,7 @@ class BetweenRule extends Rule
      * @param string $value
      * @return bool
      */
-    public function passes($field,$value)
+    public function passes($field,$value,$data)
     {
      if(strlen($value) < $this->lower)
      {

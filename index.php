@@ -9,27 +9,29 @@ use App\Validation\validator;
 require_once 'vendor/autoload.php';
 $validator = new validator([
     'first_name' => '',
+    'middle_name' => 'dsds',
+    'last_name' => 'mmm',
 ]);
 $validator->setAliases([
     'first_name' => 'First Name',
-    'email' => 'Email Address',
+    'middle_name' => 'Middle Name',
+    'last_name' => 'Last Name',
+
 ]);
 $validator->setRules([
-    'first_name'=>[
-    'required',
-    'between:5,10',
-],
-    'email'=>[
+    'first_name' => [
         'required',
-        'email',
+        'required_with:last_name,middle_name',
     ],
 
+    'last_name' => [
+        'required',
+    ],
 
 ]);
 
-if(!$validator->validate())
-{
-   dump($validator->getErrors());
-}else{
+if (!$validator->validate()) {
+    dump($validator->getErrors());
+} else {
     dump('Passed!');
 }
