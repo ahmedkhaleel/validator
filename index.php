@@ -8,13 +8,23 @@ use App\Validation\validator;
 
 require_once 'vendor/autoload.php';
 $validator = new validator([
-    'first_name' => 'ahmed ahmed',
+    'first_name' => '',
+]);
+$validator->setAliases([
+    'first_name' => 'First Name',
+    'email' => 'Email Address',
 ]);
 $validator->setRules([
     'first_name'=>[
     'required',
     'between:5,10',
 ],
+    'email'=>[
+        'required',
+        'email',
+    ],
+
+
 ]);
 
 if(!$validator->validate())

@@ -98,7 +98,7 @@ class validator
     protected function validateRule($field, Rule $rule)
     {
         if (!$rule->passes($field, $this->getFieldValue($field, $this->data))) {
-            $this->errors->add($field, $rule->message($field));
+            $this->errors->add($field, $rule->message($this->alias($field)));
         }
 
     }
@@ -114,6 +114,25 @@ class validator
     public function getErrors()
     {
         return $this->errors->getErrors();
+    }
+
+
+    /**
+     * @param array $aliases
+     * @return void
+     */
+    public function setAliases(array $aliases)
+    {
+      $this->aliases = $aliases;
+    }
+
+    /**
+     * @param $field
+     * @return mixed
+     */
+    public function alias($field)
+    {
+        return $this->aliases[$field] ?? $field;
     }
 
 }
