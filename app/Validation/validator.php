@@ -23,6 +23,11 @@ class validator
      * @var array
      */
     protected $errors;
+    public static function alias($field)
+    {
+        return self::$aliases[$field] ?? $field;
+    }
+
 
     protected function newRuleFromMap($rule, $options)
     {
@@ -98,7 +103,8 @@ class validator
     protected function validateRule($field, Rule $rule)
     {
         if (!$rule->passes($field, $this->getFieldValue($field, $this->data),$this->data)) {
-            $this->errors->add($field, $rule->message($this->alias($field)));
+
+            $this->errors->add($field, $rule->message(self::alias($field)));
         }
 
     }
@@ -116,23 +122,20 @@ class validator
         return $this->errors->getErrors();
     }
 
-
+    protected static $aliases =[];
     /**
      * @param array $aliases
      * @return void
      */
-    public function setAliases(array $aliases)
+    public function setAliases(array  $aliases)
     {
-      $this->aliases = $aliases;
+       return self::$aliases = $aliases;
     }
 
-    /**
-     * @param $field
-     * @return mixed
-     */
-    public function alias($field)
+public static function aliases(array $fields)
     {
-        return $this->aliases[$field] ?? $field;
+        return array_map(function(){
+            return self::alias($field);
+        },$fields);
     }
-
 }

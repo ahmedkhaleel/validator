@@ -1,6 +1,8 @@
 <?php
 namespace App\Validation\Rules;
 
+use App\Validation\validator;
+
 class RequiredWithRule extends Rule
 {
     protected $fields;
@@ -33,6 +35,7 @@ class RequiredWithRule extends Rule
      */
     public function message($field)
     {
+
         return $field .  ' is required with ' . implode(',',$this->fields);
     }
 }

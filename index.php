@@ -9,7 +9,7 @@ use App\Validation\validator;
 require_once 'vendor/autoload.php';
 $validator = new validator([
     'first_name' => '',
-    'middle_name' => 'dsds',
+    'middle_name' => '',
     'last_name' => 'mmm',
 ]);
 $validator->setAliases([
@@ -24,9 +24,11 @@ $validator->setRules([
         'required_with:last_name,middle_name',
     ],
 
+
     'last_name' => [
         'required',
     ],
+
 
 ]);
 
